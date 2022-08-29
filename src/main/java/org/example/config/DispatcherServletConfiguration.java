@@ -17,7 +17,7 @@ public class DispatcherServletConfiguration extends WebMvcConfigurerAdapter {
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/pages/");
-        viewResolver.setSuffix(".html");
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 

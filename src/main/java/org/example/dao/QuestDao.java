@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QuestDao implements Dao<Quest> {
 
     @Autowired
@@ -29,7 +31,7 @@ public class QuestDao implements Dao<Quest> {
 
     @Override
     public Quest findById(Integer id) {
-        return sessionFactory.openSession().get(Quest.class, id);
+        return (Quest) sessionFactory.openSession().get(Quest.class, id);
     }
 
     @Override

@@ -1,9 +1,8 @@
 package org.example.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
 import org.example.enums.Fraction;
-
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 public class NonPlayerCharacter extends BasePersist{

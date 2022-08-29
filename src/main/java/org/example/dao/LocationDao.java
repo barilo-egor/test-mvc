@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LocationDao implements Dao<Location> {
 
     @Autowired
@@ -29,7 +31,7 @@ public class LocationDao implements Dao<Location> {
 
     @Override
     public Location findById(Integer id) {
-        return sessionFactory.openSession().get(Location.class, id);
+        return (Location) sessionFactory.openSession().get(Location.class, id);
     }
 
     @Override

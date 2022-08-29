@@ -3,7 +3,9 @@ package org.example.dao;
 import org.example.entities.NonPlayerCharacter;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NPCDao implements Dao<NonPlayerCharacter>{
 
     @Autowired
@@ -26,7 +28,7 @@ public class NPCDao implements Dao<NonPlayerCharacter>{
 
     @Override
     public NonPlayerCharacter findById(Integer id) {
-        return sessionFactory.openSession().get(NonPlayerCharacter.class, id);
+        return (NonPlayerCharacter) sessionFactory.openSession().get(NonPlayerCharacter.class, id);
     }
 
     @Override

@@ -1,9 +1,8 @@
 package org.example.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
 import org.example.enums.QuestType;
-
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 public class Quest extends BasePersist{

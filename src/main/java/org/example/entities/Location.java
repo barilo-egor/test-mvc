@@ -1,8 +1,7 @@
 package org.example.entities;
 
-import jakarta.persistence.Column;
 import org.example.enums.Mainland;
-
+import javax.persistence.Column;
 import java.util.Objects;
 
 public class Location extends BasePersist{
