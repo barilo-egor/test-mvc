@@ -1,31 +1,41 @@
 package org.example.entities;
 
 import org.example.enums.Fraction;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class NonPlayerCharacter extends BasePersist{
 
     @Column
     private String name;
 
     @Column
-    private boolean isItElite;
+    private boolean eliteStatus;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private Fraction fraction;
 
-    @ManyToOne
+    @OneToOne
     private Location location;
 
     public NonPlayerCharacter() {
     }
 
-    public NonPlayerCharacter(String name, boolean isItElite, Fraction fraction) {
+    public NonPlayerCharacter(String name, boolean eliteStatus, Fraction fraction, Location location) {
         this.name = name;
-        this.isItElite = isItElite;
+        this.eliteStatus = eliteStatus;
         this.fraction = fraction;
+        this.location = location;
+    }
+
+    public NonPlayerCharacter(Integer id, String name, boolean eliteStatus, Fraction fraction, Location location) {
+        super(id);
+        this.name = name;
+        this.eliteStatus = eliteStatus;
+        this.fraction = fraction;
+        this.location = location;
     }
 
     public String getName() {
@@ -36,12 +46,12 @@ public class NonPlayerCharacter extends BasePersist{
         this.name = name;
     }
 
-    public boolean isItElite() {
-        return isItElite;
+    public boolean isEliteStatus() {
+        return eliteStatus;
     }
 
-    public void setItElite(boolean itElite) {
-        isItElite = itElite;
+    public void setEliteStatus(boolean eliteStatus) {
+        this.eliteStatus = eliteStatus;
     }
 
     public Fraction getFraction() {
@@ -66,19 +76,19 @@ public class NonPlayerCharacter extends BasePersist{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         NonPlayerCharacter that = (NonPlayerCharacter) o;
-        return isItElite == that.isItElite && Objects.equals(name, that.name) && fraction == that.fraction && Objects.equals(location, that.location);
+        return eliteStatus == that.eliteStatus && Objects.equals(name, that.name) && fraction == that.fraction && Objects.equals(location, that.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, isItElite, fraction, location);
+        return Objects.hash(super.hashCode(), name, eliteStatus, fraction, location);
     }
 
     @Override
     public String toString() {
         return "NonPlayerCharacter{" +
                 "name='" + name + '\'' +
-                ", isItElite=" + isItElite +
+                ", isItElite=" + eliteStatus +
                 ", fraction=" + fraction +
                 ", location=" + location +
                 "} " + super.toString();

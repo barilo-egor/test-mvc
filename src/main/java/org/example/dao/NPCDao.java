@@ -1,29 +1,36 @@
 package org.example.dao;
 
+import org.example.entities.Location;
 import org.example.entities.NonPlayerCharacter;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
-public class NPCDao implements Dao<NonPlayerCharacter>{
+@Transactional
+public class NPCDao extends BaseDao<NonPlayerCharacter>{
 
     @Autowired
-    private SessionFactory sessionFactory;
+    public NPCDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     @Override
-    public NonPlayerCharacter save(NonPlayerCharacter npc) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            Integer id = (Integer) session.save(npc);
-            npc = findById(id);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
-        return npc;
+    public NonPlayerCharacter save(NonPlayerCharacter nonPlayerCharacter) {
+        return super.save(nonPlayerCharacter);
+    }
+
+    @Override
+    public void update(NonPlayerCharacter nonPlayerCharacter) {
+        super.update(nonPlayerCharacter);
+    }
+
+    @Override
+    public void delete(NonPlayerCharacter nonPlayerCharacter) {
+        super.delete(nonPlayerCharacter);
     }
 
     @Override
@@ -32,28 +39,7 @@ public class NPCDao implements Dao<NonPlayerCharacter>{
     }
 
     @Override
-    public void update(NonPlayerCharacter npc) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.update(npc);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public void delete(NonPlayerCharacter npc) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.delete(npc);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
+    public List<NonPlayerCharacter> returnAll() {
+        return sessionFactory.getCurrentSession().createCriteria(NonPlayerCharacter.class).list();
     }
 }

@@ -1,27 +1,36 @@
 package org.example.entities;
 
 import org.example.enums.QuestType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Quest extends BasePersist{
 
     @Column
     private String name;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private QuestType questType;
 
-    @ManyToOne
+    @OneToOne
     private NonPlayerCharacter nonPlayerCharacter;
 
     public Quest() {
     }
 
-    public Quest(String name, QuestType questType) {
+    public Quest(String name, QuestType questType, NonPlayerCharacter nonPlayerCharacter) {
         this.name = name;
         this.questType = questType;
+        this.nonPlayerCharacter = nonPlayerCharacter;
+    }
+
+    public Quest(Integer id, String name, QuestType questType, NonPlayerCharacter nonPlayerCharacter) {
+        super(id);
+        this.name = name;
+        this.questType = questType;
+        this.nonPlayerCharacter = nonPlayerCharacter;
     }
 
     public String getName() {

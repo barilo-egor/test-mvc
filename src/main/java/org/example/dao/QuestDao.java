@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.entities.Location;
 import org.example.entities.Quest;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -7,26 +8,32 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
-public class QuestDao implements Dao<Quest> {
+@Transactional
+public class QuestDao extends BaseDao<Quest> {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    public QuestDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     @Override
     public Quest save(Quest quest) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            Integer id = (Integer) session.save(quest);
-            quest = findById(id);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
-        return quest;
+        return super.save(quest);
+    }
+
+    @Override
+    public void update(Quest quest) {
+        super.update(quest);
+    }
+
+    @Override
+    public void delete(Quest quest) {
+        super.delete(quest);
     }
 
     @Override
@@ -35,28 +42,7 @@ public class QuestDao implements Dao<Quest> {
     }
 
     @Override
-    public void update(Quest quest) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.update(quest);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public void delete(Quest quest) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.delete(quest);
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-        transaction.commit();
-        session.close();
+    public List<Quest> returnAll() {
+        return sessionFactory.getCurrentSession().createCriteria(Quest.class).list();
     }
 }

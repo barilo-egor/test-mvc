@@ -10,14 +10,18 @@ public enum Mainland {
     ZANDALAR("Зандалар"),
     KUL_TIRAS("Кул-Тирас");
 
-    private final String name;
+    private final String displayName;
 
     Mainland(String name) {
-        this.name = name;
+        this.displayName = name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getName() {
-        return name;
+        return this.name();
     }
 }
 

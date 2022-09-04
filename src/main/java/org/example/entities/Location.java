@@ -1,15 +1,17 @@
 package org.example.entities;
 
 import org.example.enums.Mainland;
-import javax.persistence.Column;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Location extends BasePersist{
 
     @Column
     private String name;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private Mainland mainland;
 
     public Location() {
