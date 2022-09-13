@@ -14,16 +14,20 @@
         <td><form:input path="id" type="hidden"/></td>
     </tr>
     <tr>
-      <td><form:label path="name">название</form:label></td>
+      <td><form:label path="name">Название</form:label></td>
       <td><form:input path="name"/></td>
     </tr>
     <tr>
-        <td><form:label path="mainland">континет</form:label></td>
+        <td><form:label path="mainland">Континет</form:label></td>
         <td>
             <form:select path="mainland">
                 <form:options items="${mainlands}" itemValue="name" itemLabel="displayName" />
             </form:select>
         </td>
+    </tr>
+    <tr>
+          <td><form:label path="introductionDate">Дата введения</form:label></td>
+          <td><form:input path="introductionDate"/></td>
     </tr>
     <tr>
       <td colspan="2">

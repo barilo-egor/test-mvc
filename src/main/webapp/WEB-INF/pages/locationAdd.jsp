@@ -11,17 +11,21 @@
 <form:form method="post" action="save.form" modelAttribute="location">
   <table border="1" style="display: inline-block;">
     <tr>
-      <td><form:label path="name">название</form:label></td>
+      <td><form:label path="name">Название</form:label></td>
       <td><form:input path="name" /></td>
     </tr>
-     <tr>
-          <td><form:label path="mainland">континет</form:label></td>
+    <tr>
+          <td><form:label path="mainland">Континет</form:label></td>
           <td>
           <form:select path="mainland">
               <form:options items="${mainlands}" itemValue="name" itemLabel="displayName" />
           </form:select>
           </td>
-     </tr>
+    </tr>
+    <tr>
+          <td><form:label path="introductionDate">Дата введения</form:label></td>
+          <td><form:input path="introductionDate" /></td>
+    </tr>
     <tr>
       <td colspan="2">
         <input type="submit" value="Submit"/>

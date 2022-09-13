@@ -1,6 +1,5 @@
 package org.example.vo;
 
-import org.example.entities.NonPlayerCharacter;
 import org.example.enums.QuestType;
 
 import java.util.Objects;

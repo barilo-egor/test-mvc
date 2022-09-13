@@ -22,6 +22,10 @@
     <td>континет</td>
     <td>${mainlandName}</td>
   </tr>
+  <tr>
+    <td>Дата введения</td>
+    <td>${introductionDate}</td>
+  </tr>
 </table>
 </body>
 </html>

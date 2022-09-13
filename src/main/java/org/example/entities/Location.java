@@ -3,6 +3,7 @@ package org.example.entities;
 import org.example.enums.Mainland;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -14,13 +15,13 @@ public class Location extends BasePersist{
     @Enumerated(EnumType.STRING)
     private Mainland mainland;
 
+    @Column
+    private Date introductionDate;
+
     public Location() {
     }
 
-    public Location(String name, Mainland mainland) {
-        this.name = name;
-        this.mainland = mainland;
-    }
+
 
     public String getName() {
         return name;
@@ -38,18 +39,26 @@ public class Location extends BasePersist{
         this.mainland = mainland;
     }
 
+    public Date getIntroductionDate() {
+        return introductionDate;
+    }
+
+    public void setIntroductionDate(Date introductionDate) {
+        this.introductionDate = introductionDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Location location = (Location) o;
-        return Objects.equals(name, location.name) && mainland == location.mainland;
+        return Objects.equals(name, location.name) && mainland == location.mainland && Objects.equals(introductionDate, location.introductionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, mainland);
+        return Objects.hash(super.hashCode(), name, mainland, introductionDate);
     }
 
     @Override
@@ -57,6 +66,7 @@ public class Location extends BasePersist{
         return "Location{" +
                 "name='" + name + '\'' +
                 ", mainland=" + mainland +
+                ", introductionDate=" + introductionDate +
                 "} " + super.toString();
     }
 }

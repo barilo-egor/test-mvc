@@ -37,6 +37,7 @@ public class LocationController {
         model.addAttribute("id", location.getId());
         model.addAttribute("name", location.getName());
         model.addAttribute("mainlandName", location.getMainland().getDisplayName());
+        model.addAttribute("introductionDate", location.getIntroductionDate());
         return "locationSave";
     }
 
@@ -51,12 +52,14 @@ public class LocationController {
         model.addAttribute("id", location.getId());
         model.addAttribute("name", location.getName());
         model.addAttribute("mainlandName", location.getMainland().getDisplayName());
+        model.addAttribute("introductionDate", location.getIntroductionDate());
         return "locationUpdate";
     }
 
     @RequestMapping("/{id}/delete.form")
     public ModelAndView deleteLocation(@PathVariable("id") Integer id) {
         locationDao.delete(locationDao.findById(id));
-        return new ModelAndView("redirect:/jsp/entities/location/list.form", "locations", locationDao.returnAll());
+        return new ModelAndView("redirect:/jsp/entities/location/list.form", "locations",
+                locationDao.returnAll());
     }
 }

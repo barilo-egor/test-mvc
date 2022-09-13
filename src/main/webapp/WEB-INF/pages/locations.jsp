@@ -10,15 +10,17 @@
 <h2>Локации</h2>
 <table border="1" style="display: inline-block;">
     <tr>
-        <th>id</th>
-        <th>название</th>
-        <th>континет</th>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Континент</th>
+        <th>Дата введения</th>
     </tr>
     <c:forEach var="location" items="${locations}">
         <tr>
             <td>${location.id}</td>
             <td>${location.name}</td>
             <td>${location.mainland.displayName}</td>
+            <td>${location.introductionDate}</td>
             <td><a href="${location.id}/edit.form">Изменить</a></td>
             <td><a href="${location.id}/delete.form">Удалить</a></td>
         </tr>

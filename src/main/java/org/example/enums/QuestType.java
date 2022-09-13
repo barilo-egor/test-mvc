@@ -8,7 +8,7 @@ public enum QuestType {
     DAILY("ежедневный"),
     WEEKLY("еженедельный");
 
-    private final String displayName;
+    final String displayName;
 
     QuestType(String name) {
         this.displayName = name;
