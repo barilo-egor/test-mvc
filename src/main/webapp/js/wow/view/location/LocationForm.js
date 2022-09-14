@@ -35,6 +35,7 @@ Ext.define('wow.view.location.LocationForm', {
             name: 'mainland',
             fieldLabel: 'Континент',
             id: 'mainlandcombobox',
+            labelAlign: 'top',
             valueField:'name',
             displayField:'displayName',
             queryMode:'remote',
@@ -44,10 +45,10 @@ Ext.define('wow.view.location.LocationForm', {
                 autoLoad: {
                     scope: this,
                     callback: function() {
-                        var comboBox = Ext.getCmp("mainlandcombobox");
-                        var store = comboBox.store;
-                        var location = comboBox.up('window').getViewModel().getData().location;
-                        if(location) {
+                        let comboBox = Ext.getCmp("mainlandcombobox");
+                        let store = comboBox.store;
+                        if(comboBox.up('window').getViewModel()) {
+                        let location = comboBox.up('window').getViewModel().getData().location;
                             for ( let i = 0; i < store.getRange().length; i++) {
                                 if(store.getRange()[i].data.displayName === location.mainland) {
                                     comboBox.setValue(store.getRange()[i]);
@@ -71,6 +72,7 @@ Ext.define('wow.view.location.LocationForm', {
             fieldLabel: 'Дата введения',
             id: 'locationdatefield',
             labelAlign: 'top',
+            format: 'd/m/Y',
             bind: {
                 value: '{location.introductionDate}'
             }

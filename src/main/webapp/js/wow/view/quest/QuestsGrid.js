@@ -20,6 +20,10 @@ Ext.define('wow.view.quest.QuestsGrid', {
     },
     columns: [
         {
+            xtype: 'checkcolumn',
+            dataIndex: 'active'
+        },
+        {
             header: 'ID',
             dataIndex: 'id',
             flex: 1

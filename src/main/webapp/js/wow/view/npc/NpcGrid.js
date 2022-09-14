@@ -20,6 +20,10 @@ Ext.define('wow.view.npc.NpcGrid', {
     },
     columns: [
         {
+            xtype: 'checkcolumn',
+            dataIndex: 'active'
+        },
+        {
             header: 'ID',
             dataIndex: 'id',
             flex: 1
@@ -62,7 +66,7 @@ Ext.define('wow.view.npc.NpcGrid', {
                             },
                             {
                                 text:'Удалить',
-                                action: 'delete'
+                                handler: 'onDeleteClick'
                             }
                         ]
                     }

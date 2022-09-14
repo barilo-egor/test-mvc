@@ -11,14 +11,11 @@ import org.example.entities.Quest;
 import org.example.enums.Fraction;
 import org.example.service.NpcService;
 import org.example.vo.NpcForm;
-import org.example.vo.QuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Controller
@@ -92,6 +89,22 @@ public class JsNPCController {
         objectNode.put("location", npc.getLocation().getName());
         result.put("success", true);
         result.put("result", objectNode);
+        return result;
+    }
+    @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ObjectNode delete(@RequestParam Integer[] array) {
+        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
+        ObjectNode result = OBJECT_MAPPER.createObjectNode();
+        for (Integer id : array) {
+            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
+            NonPlayerCharacter npc = npcDao.findById(id);
+            npcDao.delete(npc);
+            objectNode.put("id", npc.getId());
+            arrayNode.add(objectNode);
+        }
+        result.put("success", true);
+        result.put("results", arrayNode);
         return result;
     }
 }

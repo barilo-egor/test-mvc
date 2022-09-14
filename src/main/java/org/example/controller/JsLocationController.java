@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.dao.LocationDao;
 import org.example.entities.Location;
+import org.example.entities.Quest;
 import org.example.enums.Mainland;
-import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -57,12 +57,29 @@ public class JsLocationController {
         ObjectNode result = OBJECT_MAPPER.createObjectNode();
         if (location.getId() != null) locationDao.update(location);
         else locationDao.save(location);
+        location = locationDao.findById(location.getId());
         objectNode.put("id", location.getId());
         objectNode.put("name", location.getName());
         objectNode.put("mainland", location.getMainland().getDisplayName());
         objectNode.put("introductionDate", location.getIntroductionDate().toString());
         result.put("success", true);
         result.put("result", objectNode);
+        return result;
+    }
+    @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ObjectNode delete(@RequestParam Integer[] array) {
+        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
+        ObjectNode result = OBJECT_MAPPER.createObjectNode();
+        for (Integer id : array) {
+            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
+            Location location = locationDao.findById(id);
+            locationDao.delete(location);
+            objectNode.put("id", location.getId());
+            arrayNode.add(objectNode);
+        }
+        result.put("success", true);
+        result.put("results", arrayNode);
         return result;
     }
 }

@@ -20,6 +20,10 @@ Ext.define('wow.view.location.LocationGrid', {
     },
     columns: [
         {
+            xtype: 'checkcolumn',
+            dataIndex: 'active'
+        },
+        {
             header: 'ID',
             dataIndex: 'id',
             flex: 1
@@ -56,7 +60,7 @@ Ext.define('wow.view.location.LocationGrid', {
                             },
                             {
                                 text:'Удалить',
-                                action: 'delete'
+                                handler: 'onDeleteClick'
                             }
                         ]
                     }

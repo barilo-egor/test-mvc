@@ -14,9 +14,8 @@ Ext.define('wow.view.quest.QuestGridController', {
     },
     onEditClick: function() {
         let selectedRows = Ext.getCmp('questsgrid').getSelectionModel().getSelection();
-        if(selectedRows.length == 0) {
-            Ext.toast('Не выбрана строка для редактирования.')
-        } else {
+        if(selectedRows.length == 0) Ext.toast('Не выбрана строка для редактирования.');
+        else {
             Ext.create('wow.view.quest.QuestWindow', {
                 title: 'Редактирование квеста',
                 viewModel: {
@@ -29,15 +28,33 @@ Ext.define('wow.view.quest.QuestGridController', {
         }
     },
     onDeleteClick: function() {
+        let rows = Ext.getCmp('questsgrid').getStore().getRange();
+        let set = new Set;
+        for(let i = 0; i < rows.length; i++) {
+            if(rows[i].data.active) {
+                set.add(rows[i].data.id)
+            }
+        }
+        let array = Array.from(set);
+        if(array.length == 0) Ext.toast('Не выбрана строка для удаления.');
+        else {
         Ext.Ajax.request({
-            url: 'location/{' + selectedRows[0].data.id + '}/delete.form',
-            success: function(response, options){
-                let result = Ext.decode(action.response.responseText)
-                Ext.getStore('queststore').add(result.result)
+            url: 'quest/delete.form',
+            method: 'POST',
+            params: {
+                'array': array
             },
-            failure: function(response, options){
+            success: function(response){
+                let result = Ext.decode(response.responseText);
+                let store = Ext.getStore('queststore');
+                for(let i = 0; i < result.results.length; i++) {
+                    store.remove(store.findRecord('id', result.results[i].id));
+                }
+            },
+            failure: function(form, action){
                 console.log()
             }
         });
+        }
     }
 });

@@ -35,6 +35,7 @@ Ext.define('wow.view.quest.QuestForm', {
             name: 'questType',
             fieldLabel: 'Тип квеста',
             id: 'questtypecombobox',
+            labelAlign: 'top',
             valueField:'name',
             displayField:'displayName',
             queryMode:'remote',
@@ -44,11 +45,11 @@ Ext.define('wow.view.quest.QuestForm', {
                 autoLoad: {
                     scope: this,
                     callback: function() {
-                        var comboBox = Ext.getCmp("questtypecombobox");
-                        var store = comboBox.store;
-                        var quest = comboBox.up('window').getViewModel().getData().quest;
-                        if(quest) {
-                            for ( let i = 0; i < store.getRange().length; i++) {
+                        let comboBox = Ext.getCmp("questtypecombobox");
+                        let store = comboBox.store;
+                        if(comboBox.up('window').getViewModel()) {
+                        let quest = comboBox.up('window').getViewModel().getData().quest;
+                            for (let i = 0; i < store.getRange().length; i++) {
                                 if(store.getRange()[i].data.displayName === quest.questType) {
                                     comboBox.setValue(store.getRange()[i]);
                                 }
@@ -70,6 +71,7 @@ Ext.define('wow.view.quest.QuestForm', {
             name: 'npcId',
             fieldLabel: 'Имя нпс',
             id: 'npccombobox',
+            labelAlign: 'top',
             valueField:'id',
             displayField:'name',
             queryMode:'remote',
@@ -79,10 +81,10 @@ Ext.define('wow.view.quest.QuestForm', {
                 autoLoad: {
                     scope: this,
                     callback: function() {
-                        var comboBox = Ext.getCmp("npccombobox");
-                        var store = comboBox.store;
-                        var quest = comboBox.up('window').getViewModel().getData().quest;
-                            if(quest) {
+                        let comboBox = Ext.getCmp("npccombobox");
+                        let store = comboBox.store;
+                        if(comboBox.up('window').getViewModel()) {
+                        let quest = comboBox.up('window').getViewModel().getData().quest;
                                 for ( let i = 0; i < store.getRange().length; i++) {
                                     if(store.getRange()[i].data.name === quest.npc) {
                                         comboBox.setValue(store.getRange()[i]);

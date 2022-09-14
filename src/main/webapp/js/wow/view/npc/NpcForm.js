@@ -35,6 +35,7 @@ Ext.define('wow.view.npc.NpcForm', {
             name: 'eliteStatus',
             fieldLabel: 'Элита',
             id: 'elitestatuscombobox',
+            labelAlign: 'top',
             valueField:'value',
             displayField:'displayName',
             queryMode:'remote',
@@ -54,21 +55,6 @@ Ext.define('wow.view.npc.NpcForm', {
                         displayName: 'Нет'
                     }
                 ],
-//                autoLoad: {
-//                    scope: this,
-//                    callback: function() {
-//                        var comboBox = Ext.getCmp("elitestatuscombobox");
-//                        var store = comboBox.store;
-//                        var npc = comboBox.up('window').getViewModel().getData().npc;
-//                        if(npc) {
-//                            for ( let i = 0; i < store.getRange().length; i++) {
-//                                if(store.getRange()[i].data.value === npc.eliteStatus) {
-//                                    comboBox.setValue(store.getRange()[i]);
-//                                }
-//                            }
-//                        } else comboBox.setValue(store.first());
-//                    }
-//                }
             }
         },
         {
@@ -76,6 +62,7 @@ Ext.define('wow.view.npc.NpcForm', {
             name: 'fraction',
             fieldLabel: 'Фракция',
             id: 'fractioncombobox',
+            labelAlign: 'top',
             valueField:'name',
             displayField:'displayName',
             queryMode:'remote',
@@ -85,10 +72,10 @@ Ext.define('wow.view.npc.NpcForm', {
                 autoLoad: {
                     scope: this,
                     callback: function() {
-                        var comboBox = Ext.getCmp("fractioncombobox");
-                        var store = comboBox.store;
-                        var npc = comboBox.up('window').getViewModel().getData().npc;
-                        if(npc) {
+                        let comboBox = Ext.getCmp("fractioncombobox");
+                        let store = comboBox.store;
+                        if(comboBox.up('window').getViewModel()) {
+                        let npc = comboBox.up('window').getViewModel().getData().npc;
                             for ( let i = 0; i < store.getRange().length; i++) {
                                 if(store.getRange()[i].data.displayName === npc.fraction) {
                                     comboBox.setValue(store.getRange()[i]);
@@ -111,6 +98,7 @@ Ext.define('wow.view.npc.NpcForm', {
             name: 'locationId',
             fieldLabel: 'Локация',
             id: 'locationcombobox',
+            labelAlign: 'top',
             valueField:'id',
             displayField:'name',
             queryMode:'remote',
@@ -120,10 +108,10 @@ Ext.define('wow.view.npc.NpcForm', {
                 autoLoad: {
                     scope: this,
                     callback: function() {
-                        var comboBox = Ext.getCmp("locationcombobox");
-                        var store = comboBox.store;
-                        var npc = comboBox.up('window').getViewModel().getData().npc;
-                            if(location) {
+                        let comboBox = Ext.getCmp("locationcombobox");
+                        let store = comboBox.store;
+                        if(comboBox.up('window').getViewModel()) {
+                        let npc = comboBox.up('window').getViewModel().getData().npc;
                                 for ( let i = 0; i < store.getRange().length; i++) {
                                     if(store.getRange()[i].data.name === npc.location) {
                                         comboBox.setValue(store.getRange()[i]);

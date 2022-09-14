@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 @Controller
@@ -89,9 +87,20 @@ public class JsQuestController {
         result.put("result", objectNode);
         return result;
     }
-    @RequestMapping("/{id}/delete.form")
-    public ModelAndView deleteLocation(@PathVariable("id") Integer id) {
-        questDao.delete(questDao.findById(id));
-        return new ModelAndView("redirect:/jsp/entities/quest/list.form", "nonPlayerCharacters", npcDao.returnAll());
+    @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ObjectNode delete(@RequestParam Integer[] array) {
+        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
+        ObjectNode result = OBJECT_MAPPER.createObjectNode();
+        for (Integer id : array) {
+            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
+            Quest quest = questDao.findById(id);
+            questDao.delete(quest);
+            objectNode.put("id", quest.getId());
+            arrayNode.add(objectNode);
+        }
+        result.put("success", true);
+        result.put("results", arrayNode);
+        return result;
     }
 }
