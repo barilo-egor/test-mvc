@@ -8,6 +8,8 @@ Ext.define('wow.view.npc.NpcGrid', {
     controller: 'npcGridController',
     listeners: {
         rowdblclick: function(row, record){
+            if(record.data.eliteStatus) record.data.eliteStatus = 'Да';
+            else record.data.eliteStatus = 'Нет';
             Ext.create('wow.view.npc.ViewNpcWindow', {
                 title: 'Форма для просмотра нпс',
                 viewModel: {

@@ -2,62 +2,66 @@ package org.example.controller;
 
 import org.example.dao.LocationDao;
 import org.example.entities.Location;
+import org.example.enums.DateFormatter;
 import org.example.enums.Mainland;
+import org.example.enums.ModelMapper;
+import org.example.service.JspMappingService;
+import org.example.service.LocationService;
+import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+
 @Controller
 @RequestMapping("/jsp/entities/location")
 public class LocationController {
 
     @Autowired
+    private LocationService locationService;
+
+    @Autowired
     private LocationDao locationDao;
 
-    @RequestMapping("/list.form")
-    public ModelAndView showLocations() {
+    @Autowired
+    private JspMappingService jspMappingService;
 
-        return new ModelAndView("locations", "locations", locationDao.returnAll());
+    @RequestMapping("/list.form")
+    public ModelAndView list() {
+
+        return new ModelAndView("location/locations", "locations", locationDao.returnAll());
     }
 
     @RequestMapping("/add.form")
-    public ModelAndView showLocationSaveForm() {
+    public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("location", new Location());
+        modelAndView.addObject("locationForm", new LocationForm());
         modelAndView.addObject("mainlands", Mainland.values());
-        modelAndView.setViewName("locationAdd");
+        modelAndView.setViewName("location/locationAdd");
         return modelAndView;
     }
 
     @RequestMapping(value = "/save.form", method = RequestMethod.POST)
-    public String saveLocation(@ModelAttribute("location") Location location, ModelMap model) {
-        locationDao.save(location);
-        model.addAttribute("id", location.getId());
-        model.addAttribute("name", location.getName());
-        model.addAttribute("mainlandName", location.getMainland().getDisplayName());
-        model.addAttribute("introductionDate", location.getIntroductionDate());
-        return "locationSave";
+    public String save(@ModelAttribute("locationForm") LocationForm locationForm, ModelMap model) throws ParseException {
+        Location location;
+        if (locationForm.getId() != null) location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
+        else location = locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
+        jspMappingService.mapObject(location, ModelMapper.LOCATION, model);
+        return "location/locationSave";
     }
 
     @RequestMapping(value = "/{id}/edit.form")
-    public ModelAndView showLocationEditForm(@PathVariable("id") Integer id) {
-        return new ModelAndView("locationEdit", "location", locationDao.findById(id));
-    }
-
-    @RequestMapping(value = "/{id}/update.form", method = RequestMethod.POST)
-    public String updateLocation(@ModelAttribute("location") Location location, ModelMap model) {
-        locationDao.update(location);
-        model.addAttribute("id", location.getId());
-        model.addAttribute("name", location.getName());
-        model.addAttribute("mainlandName", location.getMainland().getDisplayName());
-        model.addAttribute("introductionDate", location.getIntroductionDate());
-        return "locationUpdate";
+    public ModelAndView edit(@PathVariable("id") Integer id) throws ParseException {
+        LocationForm locationForm = locationService.locationConvert(locationDao.findById(id), DateFormatter.DATE_FORMATTER_JSP);
+        return new ModelAndView("location/locationEdit", "locationForm",
+                locationForm);
     }
 
     @RequestMapping("/{id}/delete.form")
-    public ModelAndView deleteLocation(@PathVariable("id") Integer id) {
+    public ModelAndView delete(@PathVariable("id") Integer id) {
         locationDao.delete(locationDao.findById(id));
         return new ModelAndView("redirect:/jsp/entities/location/list.form", "locations",
                 locationDao.returnAll());

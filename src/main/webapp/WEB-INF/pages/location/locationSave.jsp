@@ -2,29 +2,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Обновление локации</title>
-  <style><%@include file="css/style.css"%></style>
+  <title>Сохранение локации</title>
+  <style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
-<jsp:include page="headers/locationHeader.jsp"/>
+<jsp:include page="/WEB-INF/pages/headers/locationHeader.jsp"/>
 <h2>Информация о локации</h2>
 <table border="1" style="display: inline-block;">
   <tr>
-    <td>id</td>
+    <td>ID</td>
     <td>${id}</td>
   </tr>
   <tr>
   <tr>
-    <td>название</td>
+    <td>Название</td>
     <td>${name}</td>
   </tr>
   <tr>
-    <td>континет</td>
+    <td>Континет</td>
     <td>${mainlandName}</td>
   </tr>
   <tr>
-    <td>Дата введения</td>
-    <td>${introductionDate}</td>
+      <td>Дата введения</td>
+      <td>${introductionDate}</td>
   </tr>
 </table>
 </body>

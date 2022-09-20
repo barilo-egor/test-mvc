@@ -3,12 +3,12 @@
 <html>
 <head>
   <title>Добавление локации</title>
-  <style><%@include file="css/style.css"%></style>
+  <style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
-<jsp:include page="headers/locationHeader.jsp"/>
+<jsp:include page="/WEB-INF/pages/headers/locationHeader.jsp"/>
 <h2>Введите информацию о локации</h2>
-<form:form method="post" action="save.form" modelAttribute="location">
+<form:form method="post" action="save.form" modelAttribute="locationForm">
   <table border="1" style="display: inline-block;">
     <tr>
       <td><form:label path="name">Название</form:label></td>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
           <td><form:label path="introductionDate">Дата введения</form:label></td>
-          <td><form:input path="introductionDate" /></td>
+          <td><form:input type="date" path="introductionDate" /></td>
     </tr>
     <tr>
       <td colspan="2">

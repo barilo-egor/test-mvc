@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class JsController {
 
     @RequestMapping("/application.form")
-    public String showEntities() {
+    public String application() {
 
-        return "jsPages/index";
+        return "js/index";
     }
 }

@@ -40,6 +40,7 @@ Ext.define('wow.view.quest.QuestForm', {
             displayField:'displayName',
             queryMode:'remote',
             editable: false,
+            width: 250,
             store: {
                 fields: ['name', 'displayName'],
                 autoLoad: {
@@ -76,6 +77,7 @@ Ext.define('wow.view.quest.QuestForm', {
             displayField:'name',
             queryMode:'remote',
             editable: false,
+            width: 250,
             store: {
                 fields: ['id', 'name'],
                 autoLoad: {

@@ -40,6 +40,7 @@ Ext.define('wow.view.location.LocationForm', {
             displayField:'displayName',
             queryMode:'remote',
             editable: false,
+            width: 250,
             store: {
                 fields: ['name', 'displayName'],
                 autoLoad: {
@@ -73,6 +74,7 @@ Ext.define('wow.view.location.LocationForm', {
             id: 'locationdatefield',
             labelAlign: 'top',
             format: 'd/m/Y',
+            width: 250,
             bind: {
                 value: '{location.introductionDate}'
             }

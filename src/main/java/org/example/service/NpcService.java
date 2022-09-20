@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class NpcService {
 
-    private LocationDao locationDao;
+    private final LocationDao locationDao;
 
-    private NPCDao npcDao;
+    private final NPCDao npcDao;
 
     @Autowired
     public NpcService(LocationDao locationDao, NPCDao npcDao) {

@@ -40,6 +40,8 @@ Ext.define('wow.view.npc.NpcForm', {
             displayField:'displayName',
             queryMode:'remote',
             editable: false,
+            width: 250,
+            value: true,
             bind: {
                 value: '{npc.eliteStatus}'
             },
@@ -67,6 +69,7 @@ Ext.define('wow.view.npc.NpcForm', {
             displayField:'displayName',
             queryMode:'remote',
             editable: false,
+            width: 250,
             store: {
                 fields: ['name', 'displayName'],
                 autoLoad: {
@@ -103,6 +106,7 @@ Ext.define('wow.view.npc.NpcForm', {
             displayField:'name',
             queryMode:'remote',
             editable: false,
+            width: 250,
             store: {
                 fields: ['id', 'name'],
                 autoLoad: {

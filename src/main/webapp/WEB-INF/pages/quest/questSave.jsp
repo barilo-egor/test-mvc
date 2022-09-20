@@ -3,10 +3,10 @@
 <html>
 <head>
   <title>Сохранение квеста</title>
-  <style><%@include file="css/style.css"%></style>
+  <style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
-<jsp:include page="headers/questHeader.jsp"/>
+<jsp:include page="/WEB-INF/pages/headers/questHeader.jsp"/>
 <h2>Информация о квесте</h2>
 <table border="1" style="display: inline-block;">
   <tr>

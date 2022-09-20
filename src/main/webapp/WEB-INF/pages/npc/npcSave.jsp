@@ -2,11 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Обновление нпс</title>
-  <style><%@include file="css/style.css"%></style>
+  <title>Сохранение нпс</title>
+  <style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
-<jsp:include page="headers/npcHeader.jsp"/>
+<jsp:include page="/WEB-INF/pages/headers/npcHeader.jsp"/>
 <h2>Информация о нпс</h2>
 <table border="1" style="display: inline-block;">
   <tr>
@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <td>элита</td>
-    <td>${eliteStatus}</td>
+    <td>${eliteStatus ? "Да" : "Нет"}</td>
   </tr>
   <tr>
       <td>фракциия</td>

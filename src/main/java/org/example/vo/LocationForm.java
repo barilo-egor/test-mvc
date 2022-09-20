@@ -13,9 +13,16 @@ public class LocationForm {
 
     private Mainland mainland;
 
-    private Date introductionDate;
+    private String introductionDate;
 
     public LocationForm() {
+    }
+
+    public LocationForm(Integer id, String name, Mainland mainland, String introductionDate) {
+        this.id = id;
+        this.name = name;
+        this.mainland = mainland;
+        this.introductionDate = introductionDate;
     }
 
     public Integer getId() {
@@ -42,11 +49,11 @@ public class LocationForm {
         this.mainland = mainland;
     }
 
-    public Date getIntroductionDate() {
+    public String getIntroductionDate() {
         return introductionDate;
     }
 
-    public void setIntroductionDate(Date introductionDate) {
+    public void setIntroductionDate(String introductionDate) {
         this.introductionDate = introductionDate;
     }
 
@@ -69,7 +76,7 @@ public class LocationForm {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mainland=" + mainland +
-                ", introductionDate=" + introductionDate +
+                ", introductionDate='" + introductionDate + '\'' +
                 '}';
     }
 }

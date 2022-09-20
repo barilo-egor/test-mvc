@@ -1,85 +1,63 @@
 package org.example.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.dao.LocationDao;
 import org.example.entities.Location;
-import org.example.entities.Quest;
+import org.example.enums.DateFormatter;
 import org.example.enums.Mainland;
+import org.example.enums.Mapper;
+import org.example.service.LocationService;
+import org.example.service.JsMappingService;
+import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.text.ParseException;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/js/location")
 public class JsLocationController {
 
     @Autowired
+    private LocationService locationService;
+
+    @Autowired
     private LocationDao locationDao;
 
-    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    @Autowired
+    private JsMappingService jsMappingService;
 
     @RequestMapping(value = "/getAll.form", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ArrayNode getAll() {
-        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
-        List<Location> locations = locationDao.returnAll();
-        for (Location location : locations) {
-            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
-            objectNode.put("id", location.getId());
-            objectNode.put("name", location.getName());
-            objectNode.put("mainland", location.getMainland().getDisplayName());
-            objectNode.put("introductionDate", location.getIntroductionDate().toString());
-            arrayNode.add(objectNode);
-        }
-        return arrayNode;
+        return jsMappingService.mapObjects(locationDao.returnAll(), Mapper.LOCATION);
     }
+
     @RequestMapping(value = "/mainlands.form", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ArrayNode mainlands() {
-        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
-        for (Mainland mainland : Mainland.values()) {
-            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
-            objectNode.put("name", mainland.getName());
-            objectNode.put("displayName", mainland.getDisplayName());
-            arrayNode.add(objectNode);
-        }
-        return arrayNode;
+        return jsMappingService.mapObjects(Arrays.asList(Mainland.values()), Mapper.MAINLAND);
     }
+
     @RequestMapping(value = "/create.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ObjectNode create(@ModelAttribute Location location) {
-        ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
-        ObjectNode result = OBJECT_MAPPER.createObjectNode();
-        if (location.getId() != null) locationDao.update(location);
-        else locationDao.save(location);
-        location = locationDao.findById(location.getId());
-        objectNode.put("id", location.getId());
-        objectNode.put("name", location.getName());
-        objectNode.put("mainland", location.getMainland().getDisplayName());
-        objectNode.put("introductionDate", location.getIntroductionDate().toString());
-        result.put("success", true);
-        result.put("result", objectNode);
-        return result;
+    public ObjectNode create(@ModelAttribute("locationForm") LocationForm locationForm) throws ParseException {
+        Location location;
+        if (locationForm.getId() != null) location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
+        else location = locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
+        return jsMappingService.mapResult(jsMappingService.mapObject(location, Mapper.LOCATION));
     }
+
     @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ObjectNode delete(@RequestParam Integer[] array) {
-        ArrayNode arrayNode = OBJECT_MAPPER.createArrayNode();
-        ObjectNode result = OBJECT_MAPPER.createObjectNode();
         for (Integer id : array) {
-            ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
-            Location location = locationDao.findById(id);
-            locationDao.delete(location);
-            objectNode.put("id", location.getId());
-            arrayNode.add(objectNode);
+            locationDao.delete(locationDao.findById(id));
         }
-        result.put("success", true);
-        result.put("results", arrayNode);
-        return result;
+        return jsMappingService.mapResult(jsMappingService.mapObjects(Arrays.asList(array), Mapper.OBJECT_ID));
     }
 }

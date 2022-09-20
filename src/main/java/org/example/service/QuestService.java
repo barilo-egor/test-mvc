@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestService {
 
-    private NPCDao npcDao;
+    private final NPCDao npcDao;
 
-    private QuestDao questDao;
+    private final QuestDao questDao;
 
     @Autowired
     public QuestService(NPCDao npcDao, QuestDao questDao) {

@@ -42,8 +42,8 @@ Ext.define('wow.view.location.LocationGridController', {
                 success: function(response){
                     let result = Ext.decode(response.responseText);
                     let store = Ext.getStore('locationstore');
-                    for(let i = 0; i < result.results.length; i++) {
-                        store.remove(store.findRecord('id', result.results[i].id));
+                    for(let i = 0; i < result.result.length; i++) {
+                        store.remove(store.findRecord('id', result.result[i].id));
                     }
                 },
                 failure: function(form, action){

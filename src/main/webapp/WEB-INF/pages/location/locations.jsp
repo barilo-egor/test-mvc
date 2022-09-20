@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Локации</title>
-<style><%@include file="css/style.css"%></style>
+<style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
 <header><a href="/test-mvc/jsp/entities.form">Главная</a></header>

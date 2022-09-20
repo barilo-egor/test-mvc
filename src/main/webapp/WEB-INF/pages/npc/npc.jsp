@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>НПС</title>
-<style><%@include file="css/style.css"%></style>
+<style><%@include file="/WEB-INF/pages/css/style.css"%></style>
 </head>
 <body class="center">
 <header><a href="/test-mvc/jsp/entities.form">Главная</a></header>
@@ -20,7 +20,7 @@
         <tr>
             <td>${npc.id}</td>
             <td>${npc.name}</td>
-            <td>${npc.eliteStatus}</td>
+            <td>${npc.eliteStatus ? "Да" : "Нет"}</td>
             <td>${npc.fraction.displayName}</td>
             <td>${npc.location.name}</td>
             <td><a href="${npc.id}/edit.form">Изменить</a></td>

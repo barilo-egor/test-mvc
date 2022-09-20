@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @RequestMapping("/entities.form")
-    public String showEntities() {
-
+    public String entities() {
         return "entities";
     }
 }
