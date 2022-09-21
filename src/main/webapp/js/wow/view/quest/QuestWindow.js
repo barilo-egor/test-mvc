@@ -15,10 +15,7 @@ Ext.define('wow.view.quest.QuestWindow', {
                         quest: '{quest}',
                     }
                 }
-            },
-//            bind: {
-//                url: '{url}'
-//            }
+            }
         }
     ]
 });

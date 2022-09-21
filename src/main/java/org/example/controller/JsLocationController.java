@@ -7,8 +7,8 @@ import org.example.entities.Location;
 import org.example.enums.DateFormatter;
 import org.example.enums.Mainland;
 import org.example.enums.Mapper;
-import org.example.service.LocationService;
 import org.example.service.JsMappingService;
+import org.example.service.LocationService;
 import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -47,7 +47,8 @@ public class JsLocationController {
     @ResponseBody
     public ObjectNode create(@ModelAttribute("locationForm") LocationForm locationForm) throws ParseException {
         Location location;
-        if (locationForm.getId() != null) location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
+        if (locationForm.getId() != null)
+            location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
         else location = locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
         return jsMappingService.mapResult(location, Mapper.LOCATION);
     }

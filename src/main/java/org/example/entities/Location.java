@@ -2,12 +2,15 @@ package org.example.entities;
 
 import org.example.enums.Mainland;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Location extends BasePersist{
+public class Location extends BasePersist {
 
     @Column
     private String name;

@@ -10,10 +10,10 @@
     <h2>Квесты</h2>
     <table border="1" style="display: inline-block;">
         <tr>
-            <th>id</th>
-            <th>название</th>
-            <th>тип квеста</th>
-            <th>нпс</th>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Тип квеста</th>
+            <th>Нпс</th>
         </tr>
         <c:forEach var="quest" items="${quests}">
         <tr>

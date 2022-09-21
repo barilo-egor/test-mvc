@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Hello Ext</title>
-
     <script type="text/javascript" src='extJS/ext-all.js'></script>
     <script type="text/javascript" src='extJS/locale/locale-ru.js'></script>
     <script type="text/javascript" src='extJS/theme-classic/theme-classic.js'></script>

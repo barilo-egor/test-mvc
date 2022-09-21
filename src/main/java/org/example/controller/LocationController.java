@@ -1,9 +1,7 @@
 package org.example.controller;
 
 import org.example.dao.LocationDao;
-import org.example.entities.Location;
 import org.example.enums.DateFormatter;
-import org.example.enums.Mainland;
 import org.example.enums.ModelMapper;
 import org.example.service.JspMappingService;
 import org.example.service.LocationService;
@@ -35,23 +33,20 @@ public class LocationController {
     @RequestMapping("/list.form")
     public ModelAndView list() {
         return new ModelAndView("location/locations", "locationForms",
-                locationService.convertToLocationForms(locationDao.returnAll(),DateFormatter.DATE_FORMATTER_JSP));
+                locationService.convertToLocationForms(locationDao.returnAll(), DateFormatter.DATE_FORMATTER_JSP));
     }
 
     @RequestMapping("/add.form")
     public ModelAndView add() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("locationForm", new LocationForm());
-        modelAndView.addObject("mainlands", Mainland.values());
-        modelAndView.setViewName("location/locationAdd");
-        return modelAndView;
+        return new ModelAndView("location/locationAdd", "locationForm", new LocationForm());
     }
 
     @RequestMapping(value = "/save.form", method = RequestMethod.POST)
     public String save(@ModelAttribute("locationForm") LocationForm locationForm, ModelMap model) throws ParseException {
-        Location location;
-        if (locationForm.getId() != null) locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
-        else locationForm.setId(locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP).getId());
+        if (locationForm.getId() != null)
+            locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
+        else
+            locationForm.setId(locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP).getId());
         jspMappingService.mapObject(locationForm, ModelMapper.LOCATION_FORM, model);
         return "location/locationSave";
     }
@@ -59,8 +54,7 @@ public class LocationController {
     @RequestMapping(value = "/{id}/edit.form")
     public ModelAndView edit(@PathVariable("id") Integer id) throws ParseException {
         LocationForm locationForm = locationService.convertToLocationForm(locationDao.findById(id), DateFormatter.DATE_FORMATTER_JSP);
-        return new ModelAndView("location/locationEdit", "locationForm",
-                locationForm);
+        return new ModelAndView("location/locationEdit", "locationForm", locationForm);
     }
 
     @RequestMapping("/{id}/delete.form")

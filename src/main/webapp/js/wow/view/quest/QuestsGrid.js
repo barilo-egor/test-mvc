@@ -1,6 +1,5 @@
 Ext.define('wow.view.quest.QuestsGrid', {
     extend: 'Ext.grid.Panel',
-//    title: 'Квесты',
     xtype: 'questsgrid',
     store: 'queststore',
     id: 'questsgrid',

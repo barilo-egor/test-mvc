@@ -3,7 +3,6 @@ package org.example.controller;
 import org.example.dao.LocationDao;
 import org.example.dao.NPCDao;
 import org.example.entities.NonPlayerCharacter;
-import org.example.enums.Fraction;
 import org.example.enums.ModelMapper;
 import org.example.service.JspMappingService;
 import org.example.service.NpcService;
@@ -43,7 +42,6 @@ public class NPCController {
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("npcForm", new NpcForm());
-        modelAndView.addObject("fractions", Fraction.values());
         modelAndView.addObject("locations", locationDao.returnAll());
         modelAndView.setViewName("npc/npcAdd");
         return modelAndView;
@@ -62,7 +60,6 @@ public class NPCController {
     public ModelAndView edit(@PathVariable("id") Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("npcForm", npcService.convertToNpcForm(npcDao.findById(id)));
-        modelAndView.addObject("fractions", Fraction.values());
         modelAndView.addObject("locations", locationDao.returnAll());
         modelAndView.setViewName("npc/npcEdit");
         return modelAndView;

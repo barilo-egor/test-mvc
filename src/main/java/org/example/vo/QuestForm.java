@@ -17,13 +17,6 @@ public class QuestForm {
     public QuestForm() {
     }
 
-    public QuestForm(Integer id, String name, QuestType questType, Integer npcId) {
-        this.id = id;
-        this.name = name;
-        this.questType = questType;
-        this.npcId = npcId;
-    }
-
     public Integer getId() {
         return id;
     }

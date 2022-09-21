@@ -1,6 +1,5 @@
 Ext.define('wow.view.location.LocationGrid', {
     extend: 'Ext.grid.Panel',
-//    title: 'Локации',
     xtype: 'locationgrid',
     store: 'locationstore',
     id: 'locationgrid',
@@ -45,24 +44,24 @@ Ext.define('wow.view.location.LocationGrid', {
             format: 'd/m/Y',
             flex: 2
         }],
-        dockedItems: [
-                    {
-                        xtype:'toolbar',
-                        docked: 'top',
-                        items: [
-                            {
-                                text:'Создать',
-                                handler: 'onCreateClick'
-                            },
-                            {
-                                text:'Редактировать',
-                                handler: 'onEditClick'
-                            },
-                            {
-                                text:'Удалить',
-                                handler: 'onDeleteClick'
-                            }
-                        ]
-                    }
-                ]
+    dockedItems: [
+        {
+            xtype:'toolbar',
+            docked: 'top',
+            items: [
+                {
+                    text:'Создать',
+                    handler: 'onCreateClick'
+                },
+                {
+                    text:'Редактировать',
+                    handler: 'onEditClick'
+                },
+                {
+                    text:'Удалить',
+                    handler: 'onDeleteClick'
+                }
+            ]
+        }
+    ]
 });

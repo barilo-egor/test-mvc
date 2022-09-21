@@ -10,24 +10,24 @@
 <h2>Информация о нпс</h2>
 <table border="1" style="display: inline-block;">
   <tr>
-    <td>id</td>
+    <td>ID</td>
     <td>${id}</td>
   </tr>
   <tr>
   <tr>
-    <td>имя</td>
+    <td>Имя</td>
     <td>${name}</td>
   </tr>
   <tr>
-    <td>элита</td>
+    <td>Элита</td>
     <td>${eliteStatus ? "Да" : "Нет"}</td>
   </tr>
   <tr>
-      <td>фракциия</td>
+      <td>Фракциия</td>
       <td>${fraction}</td>
   </tr>
   <tr>
-      <td>локация</td>
+      <td>Локация</td>
       <td>${location}</td>
     </tr>
 </table>

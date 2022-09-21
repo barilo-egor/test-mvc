@@ -4,12 +4,7 @@ Ext.define('wow.view.quest.QuestGridController', {
     requires: ['wow.view.quest.QuestWindow'],
     onCreateClick: function() {
         Ext.create('wow.view.quest.QuestWindow', {
-            title: 'Создание квеста',
-//            viewModel: {
-//                data: {
-//                    url: 'quest/create.form'
-//                }
-//            }
+            title: 'Создание квеста'
         }).show();
     },
     onEditClick: function() {
@@ -21,7 +16,6 @@ Ext.define('wow.view.quest.QuestGridController', {
                 viewModel: {
                     data: {
                         quest: selectedRows[0].data,
-//                        url: 'quest/edit.form'
                     }
                 }
             }).show();

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Quest extends BasePersist{
+public class Quest extends BasePersist {
 
     @Column
     private String name;

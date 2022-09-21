@@ -10,20 +10,20 @@
 <h2>Информация о квесте</h2>
 <table border="1" style="display: inline-block;">
   <tr>
-    <td>id</td>
+    <td>ID</td>
     <td>${id}</td>
   </tr>
   <tr>
   <tr>
-    <td>название</td>
+    <td>Название</td>
     <td>${name}</td>
   </tr>
   <tr>
-      <td>тип квеста</td>
+      <td>Тип квеста</td>
       <td>${questType}</td>
   </tr>
   <tr>
-      <td>нпс</td>
+      <td>Нпс</td>
       <td>${npc}</td>
     </tr>
 </table>

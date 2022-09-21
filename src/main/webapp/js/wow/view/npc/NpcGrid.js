@@ -1,6 +1,5 @@
 Ext.define('wow.view.npc.NpcGrid', {
     extend: 'Ext.grid.Panel',
-//    title: 'НПС',
     xtype: 'npcgrid',
     store: 'npcstore',
     id: 'npcgrid',
@@ -53,24 +52,24 @@ Ext.define('wow.view.npc.NpcGrid', {
             dataIndex: 'location',
             flex: 3
         }],
-        dockedItems: [
-                    {
-                        xtype:'toolbar',
-                        docked: 'top',
-                        items: [
-                            {
-                                text:'Создать',
-                                handler: 'onCreateClick'
-                            },
-                            {
-                                text:'Редактировать',
-                                handler: 'onEditClick'
-                            },
-                            {
-                                text:'Удалить',
-                                handler: 'onDeleteClick'
-                            }
-                        ]
-                    }
-                ]
+    dockedItems: [
+        {
+            xtype:'toolbar',
+            docked: 'top',
+            items: [
+                {
+                    text:'Создать',
+                    handler: 'onCreateClick'
+                },
+                {
+                    text:'Редактировать',
+                    handler: 'onEditClick'
+                },
+                {
+                    text:'Удалить',
+                    handler: 'onDeleteClick'
+                }
+            ]
+        }
+    ]
 });

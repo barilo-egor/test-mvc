@@ -13,16 +13,16 @@ public enum ModelMapper {
         Quest quest = (Quest) o;
         return modelMap.addAttribute("id", quest.getId())
                 .addAttribute("name", quest.getName())
-                .addAttribute("questType",quest.getQuestType().getDisplayName())
-                .addAttribute("npc",quest.getNonPlayerCharacter().getName());
+                .addAttribute("questType", quest.getQuestType().getDisplayName())
+                .addAttribute("npc", quest.getNonPlayerCharacter().getName());
     }),
     NPC((o, modelMap) -> {
         NonPlayerCharacter npc = (NonPlayerCharacter) o;
         return modelMap.addAttribute("id", npc.getId())
                 .addAttribute("name", npc.getName())
-                .addAttribute("eliteStatus",npc.isEliteStatus())
-                .addAttribute("fraction",npc.getFraction().getDisplayName())
-                .addAttribute("location",npc.getLocation().getName());
+                .addAttribute("eliteStatus", npc.isEliteStatus())
+                .addAttribute("fraction", npc.getFraction().getDisplayName())
+                .addAttribute("location", npc.getLocation().getName());
     }),
     LOCATION((o, modelMap) -> {
         Location location = (Location) o;

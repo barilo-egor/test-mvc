@@ -1,6 +1,7 @@
 package org.example.vo;
 
 import org.example.enums.Fraction;
+
 import java.util.Objects;
 
 public class NpcForm {
@@ -16,14 +17,6 @@ public class NpcForm {
     private Integer locationId;
 
     public NpcForm() {
-    }
-
-    public NpcForm(Integer id, String name, boolean eliteStatus, Fraction fraction, Integer locationId) {
-        this.id = id;
-        this.name = name;
-        this.eliteStatus = eliteStatus;
-        this.fraction = fraction;
-        this.locationId = locationId;
     }
 
     public Integer getId() {

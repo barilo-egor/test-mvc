@@ -14,11 +14,11 @@
           <td><form:input path="id" type="hidden"/></td>
     </tr>
     <tr>
-      <td><form:label path="name">название</form:label></td>
+      <td><form:label path="name">Название</form:label></td>
       <td><form:input path="name" /></td>
     </tr>
     <tr>
-              <td><form:label path="questType">тип квеста</form:label></td>
+              <td><form:label path="questType">Тип квеста</form:label></td>
               <td>
                 <form:select path="questType">
                     <form:options items="${questTypes}" itemValue="name" itemLabel="displayName"/>
@@ -26,7 +26,7 @@
               </td>
     </tr>
     <tr>
-                  <td><form:label path="npcId">нпс</form:label></td>
+                  <td><form:label path="npcId">Нпс</form:label></td>
                   <td>
                   <form:select path="npcId">
                       <form:options items="${nonPlayerCharacters}" itemValue="id" itemLabel="name"/>

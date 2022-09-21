@@ -10,11 +10,11 @@
 <h2>НПС</h2>
 <table border="1" style="display: inline-block;">
     <tr>
-        <th>id</th>
-        <th>имя</th>
-        <th>элита</th>
-        <th>фракция</th>
-        <th>локация</th>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Элита</th>
+        <th>Фракция</th>
+        <th>Локация</th>
     </tr>
     <c:forEach var="npc" items="${nonPlayerCharacters}">
         <tr>

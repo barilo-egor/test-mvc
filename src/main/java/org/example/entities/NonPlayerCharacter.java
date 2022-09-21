@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class NonPlayerCharacter extends BasePersist{
+public class NonPlayerCharacter extends BasePersist {
 
     @Column
     private String name;

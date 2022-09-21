@@ -11,20 +11,20 @@
 <form:form method="post" action="save.form" modelAttribute="npcForm">
   <table border="1" style="display: inline-block;">
     <tr>
-      <td><form:label path="name">имя</form:label></td>
+      <td><form:label path="name">Имя</form:label></td>
       <td><form:input path="name" /></td>
     </tr>
     <tr>
-              <td><form:label path="eliteStatus">элита</form:label></td>
+              <td><form:label path="eliteStatus">Элита</form:label></td>
               <td>
               <form:select path="eliteStatus">
-                  <option value="true">да</option>
-                  <option value="false">нет</option>
+                  <option value="true">Да</option>
+                  <option value="false">Нет</option>
               </form:select>
               </td>
     </tr>
     <tr>
-              <td><form:label path="fraction">фракциия</form:label></td>
+              <td><form:label path="fraction">Фракциия</form:label></td>
               <td>
               <form:select path="fraction">
                   <form:options items="${fractions}" itemValue="name" itemLabel="displayName"/>
@@ -32,7 +32,7 @@
               </td>
     </tr>
      <tr>
-                  <td><form:label path="locationId">локация</form:label></td>
+                  <td><form:label path="locationId">Локация</form:label></td>
                   <td>
                   <form:select path="locationId">
                       <form:options items="${locations}" itemValue="id" itemLabel="name"/>

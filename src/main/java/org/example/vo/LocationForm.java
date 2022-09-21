@@ -2,7 +2,6 @@ package org.example.vo;
 
 import org.example.enums.Mainland;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class LocationForm {
@@ -16,13 +15,6 @@ public class LocationForm {
     private String introductionDate;
 
     public LocationForm() {
-    }
-
-    public LocationForm(Integer id, String name, Mainland mainland, String introductionDate) {
-        this.id = id;
-        this.name = name;
-        this.mainland = mainland;
-        this.introductionDate = introductionDate;
     }
 
     public Integer getId() {

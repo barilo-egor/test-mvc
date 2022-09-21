@@ -4,14 +4,16 @@ import org.example.dao.NPCDao;
 import org.example.dao.QuestDao;
 import org.example.entities.Quest;
 import org.example.enums.ModelMapper;
-import org.example.enums.QuestType;
 import org.example.service.JspMappingService;
 import org.example.service.QuestService;
 import org.example.vo.QuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,7 +42,6 @@ public class QuestController {
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("questForm", new QuestForm());
-        modelAndView.addObject("questTypes", QuestType.values());
         modelAndView.addObject("nonPlayerCharacters", npcDao.returnAll());
         modelAndView.setViewName("quest/questAdd");
         return modelAndView;
@@ -59,7 +60,6 @@ public class QuestController {
     public ModelAndView edit(@PathVariable("id") Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("questForm", questService.convertToQuestForm(questDao.findById(id)));
-        modelAndView.addObject("questTypes", QuestType.values());
         modelAndView.addObject("nonPlayerCharacters", npcDao.returnAll());
         modelAndView.setViewName("quest/questEdit");
         return modelAndView;
