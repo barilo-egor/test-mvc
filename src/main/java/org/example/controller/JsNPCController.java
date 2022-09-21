@@ -60,7 +60,7 @@ public class JsNPCController {
         NonPlayerCharacter npc;
         if (npcForm.getId() != null) npc = npcService.updateNpcFromForm(npcForm);
         else npc = npcService.saveNpcFromForm(npcForm);
-        return jsMappingService.mapResult(jsMappingService.mapObject(npc, Mapper.NPC));
+        return jsMappingService.mapResult(npc, Mapper.NPC);
     }
 
     @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,6 +69,6 @@ public class JsNPCController {
         for (Integer id : array) {
             npcDao.delete(npcDao.findById(id));
         }
-        return jsMappingService.mapResult(jsMappingService.mapObjects(Arrays.asList(array), Mapper.OBJECT_ID));
+        return jsMappingService.mapResult(Arrays.asList(array), Mapper.OBJECT_ID);
     }
 }

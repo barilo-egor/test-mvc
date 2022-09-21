@@ -60,7 +60,7 @@ public class JsQuestController {
         Quest quest;
         if (questForm.getId() != null) quest = questService.updateQuestFromForm(questForm);
         else quest = questService.saveQuestFromForm(questForm);
-        return jsMappingService.mapResult(jsMappingService.mapObject(quest, Mapper.QUEST));
+        return jsMappingService.mapResult(quest, Mapper.QUEST);
     }
 
     @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,6 +69,6 @@ public class JsQuestController {
         for (Integer id : array) {
             questDao.delete(questDao.findById(id));
         }
-        return jsMappingService.mapResult(jsMappingService.mapObjects(Arrays.asList(array), Mapper.OBJECT_ID));
+        return jsMappingService.mapResult(Arrays.asList(array), Mapper.OBJECT_ID);
     }
 }

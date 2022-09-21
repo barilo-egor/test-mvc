@@ -25,10 +25,17 @@ public class JsMappingService {
         return mapper.getObjectMapper().apply(OBJECT_MAPPER, object);
     }
 
-    public ObjectNode mapResult(BaseJsonNode baseJsonNode) {
+    public ObjectNode mapResult(List<?> objects, Mapper mapper) {
         ObjectNode result = OBJECT_MAPPER.createObjectNode();
         result.put("success", true);
-        result.put("result", baseJsonNode);
+        result.put("result", mapObjects(objects, mapper));
+        return result;
+    }
+
+    public ObjectNode mapResult(Object object, Mapper mapper) {
+        ObjectNode result = OBJECT_MAPPER.createObjectNode();
+        result.put("success", true);
+        result.put("result", mapObject(object, mapper));
         return result;
     }
 }

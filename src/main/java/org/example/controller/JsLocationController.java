@@ -49,7 +49,7 @@ public class JsLocationController {
         Location location;
         if (locationForm.getId() != null) location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
         else location = locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JS);
-        return jsMappingService.mapResult(jsMappingService.mapObject(location, Mapper.LOCATION));
+        return jsMappingService.mapResult(location, Mapper.LOCATION);
     }
 
     @RequestMapping(value = "/delete.form", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,6 +58,6 @@ public class JsLocationController {
         for (Integer id : array) {
             locationDao.delete(locationDao.findById(id));
         }
-        return jsMappingService.mapResult(jsMappingService.mapObjects(Arrays.asList(array), Mapper.OBJECT_ID));
+        return jsMappingService.mapResult(Arrays.asList(array), Mapper.OBJECT_ID);
     }
 }
