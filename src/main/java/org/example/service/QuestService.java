@@ -22,35 +22,30 @@ public class QuestService {
 
     public Quest saveQuestFromForm(QuestForm questForm) {
 
-        return questDao.save(questConvert(questForm));
+        return questDao.save(convertToQuest(questForm));
     }
 
     public Quest updateQuestFromForm(QuestForm questForm) {
-        Quest quest = questConvert(questForm);
+        Quest quest = convertToQuest(questForm);
         questDao.update(quest);
         return quest;
     }
 
-    public Quest questConvert(QuestForm questForm) {
-        if (questForm.getId() != null) {
-            return new Quest(
-                    questForm.getId(),
-                    questForm.getName(),
-                    questForm.getQuestType(),
-                    npcDao.findById(questForm.getNpcId()));
-        } else {
-            return new Quest(
-                    questForm.getName(),
-                    questForm.getQuestType(),
-                    npcDao.findById(questForm.getNpcId()));
-        }
+    public Quest convertToQuest(QuestForm questForm) {
+        Quest quest = new Quest();
+        quest.setId(questForm.getId());
+        quest.setName(questForm.getName());
+        quest.setQuestType(questForm.getQuestType());
+        quest.setNonPlayerCharacter(npcDao.findById(questForm.getNpcId()));
+        return quest;
     }
 
-    public QuestForm questConvert(Quest quest) {
-        return new QuestForm(
-                quest.getId(),
-                quest.getName(),
-                quest.getQuestType(),
-                quest.getNonPlayerCharacter().getId());
+    public QuestForm convertToQuestForm(Quest quest) {
+        QuestForm questForm = new QuestForm();
+        questForm.setId(questForm.getId());
+        questForm.setName(questForm.getName());
+        questForm.setQuestType(questForm.getQuestType());
+        questForm.setNpcId(quest.getNonPlayerCharacter().getId());
+        return questForm;
     }
 }

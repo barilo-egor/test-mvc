@@ -13,16 +13,19 @@
         <th>ID</th>
         <th>Название</th>
         <th>Континент</th>
-        <th>Дата введения</th>
+        <th>
+            Дата введения<br>
+            (гг-мм-дд)
+        </th>
     </tr>
-    <c:forEach var="location" items="${locations}">
+    <c:forEach var="locationForm" items="${locationForms}">
         <tr>
-            <td>${location.id}</td>
-            <td>${location.name}</td>
-            <td>${location.mainland.displayName}</td>
-            <td>${location.introductionDate}</td>
-            <td><a href="${location.id}/edit.form">Изменить</a></td>
-            <td><a href="${location.id}/delete.form">Удалить</a></td>
+            <td>${locationForm.id}</td>
+            <td>${locationForm.name}</td>
+            <td>${locationForm.mainland.displayName}</td>
+            <td>${locationForm.introductionDate}</td>
+            <td><a href="${locationForm.id}/edit.form">Изменить</a></td>
+            <td><a href="${locationForm.id}/delete.form">Удалить</a></td>
         </tr>
     </c:forEach>
 </table>

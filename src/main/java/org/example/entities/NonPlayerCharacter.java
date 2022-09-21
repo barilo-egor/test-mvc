@@ -23,21 +23,6 @@ public class NonPlayerCharacter extends BasePersist{
     public NonPlayerCharacter() {
     }
 
-    public NonPlayerCharacter(String name, boolean eliteStatus, Fraction fraction, Location location) {
-        this.name = name;
-        this.eliteStatus = eliteStatus;
-        this.fraction = fraction;
-        this.location = location;
-    }
-
-    public NonPlayerCharacter(Integer id, String name, boolean eliteStatus, Fraction fraction, Location location) {
-        super(id);
-        this.name = name;
-        this.eliteStatus = eliteStatus;
-        this.fraction = fraction;
-        this.location = location;
-    }
-
     public String getName() {
         return name;
     }

@@ -20,19 +20,6 @@ public class Quest extends BasePersist{
     public Quest() {
     }
 
-    public Quest(String name, QuestType questType, NonPlayerCharacter nonPlayerCharacter) {
-        this.name = name;
-        this.questType = questType;
-        this.nonPlayerCharacter = nonPlayerCharacter;
-    }
-
-    public Quest(Integer id, String name, QuestType questType, NonPlayerCharacter nonPlayerCharacter) {
-        super(id);
-        this.name = name;
-        this.questType = questType;
-        this.nonPlayerCharacter = nonPlayerCharacter;
-    }
-
     public String getName() {
         return name;
     }

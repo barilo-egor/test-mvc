@@ -11,7 +11,10 @@ import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
@@ -31,8 +34,8 @@ public class LocationController {
 
     @RequestMapping("/list.form")
     public ModelAndView list() {
-
-        return new ModelAndView("location/locations", "locations", locationDao.returnAll());
+        return new ModelAndView("location/locations", "locationForms",
+                locationService.convertToLocationForms(locationDao.returnAll(),DateFormatter.DATE_FORMATTER_JSP));
     }
 
     @RequestMapping("/add.form")
@@ -47,15 +50,15 @@ public class LocationController {
     @RequestMapping(value = "/save.form", method = RequestMethod.POST)
     public String save(@ModelAttribute("locationForm") LocationForm locationForm, ModelMap model) throws ParseException {
         Location location;
-        if (locationForm.getId() != null) location = locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
-        else location = locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
-        jspMappingService.mapObject(location, ModelMapper.LOCATION, model);
+        if (locationForm.getId() != null) locationService.updateLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP);
+        else locationForm.setId(locationService.saveLocationFromForm(locationForm, DateFormatter.DATE_FORMATTER_JSP).getId());
+        jspMappingService.mapObject(locationForm, ModelMapper.LOCATION_FORM, model);
         return "location/locationSave";
     }
 
     @RequestMapping(value = "/{id}/edit.form")
     public ModelAndView edit(@PathVariable("id") Integer id) throws ParseException {
-        LocationForm locationForm = locationService.locationConvert(locationDao.findById(id), DateFormatter.DATE_FORMATTER_JSP);
+        LocationForm locationForm = locationService.convertToLocationForm(locationDao.findById(id), DateFormatter.DATE_FORMATTER_JSP);
         return new ModelAndView("location/locationEdit", "locationForm",
                 locationForm);
     }

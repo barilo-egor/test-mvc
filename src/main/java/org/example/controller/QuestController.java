@@ -58,7 +58,7 @@ public class QuestController {
     @RequestMapping(value = "/{id}/edit.form")
     public ModelAndView edit(@PathVariable("id") Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("questForm", questService.questConvert(questDao.findById(id)));
+        modelAndView.addObject("questForm", questService.convertToQuestForm(questDao.findById(id)));
         modelAndView.addObject("questTypes", QuestType.values());
         modelAndView.addObject("nonPlayerCharacters", npcDao.returnAll());
         modelAndView.setViewName("quest/questEdit");

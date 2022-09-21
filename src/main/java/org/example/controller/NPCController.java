@@ -61,10 +61,9 @@ public class NPCController {
     @RequestMapping(value = "/{id}/edit.form")
     public ModelAndView edit(@PathVariable("id") Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("npcForm", npcService.npcConvert(npcDao.findById(id)));
+        modelAndView.addObject("npcForm", npcService.convertToNpcForm(npcDao.findById(id)));
         modelAndView.addObject("fractions", Fraction.values());
         modelAndView.addObject("locations", locationDao.returnAll());
-        modelAndView.addObject("bool", true);
         modelAndView.setViewName("npc/npcEdit");
         return modelAndView;
     }

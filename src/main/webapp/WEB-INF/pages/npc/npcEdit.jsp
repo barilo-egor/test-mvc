@@ -21,8 +21,8 @@
         <td><form:label path="eliteStatus">элита</form:label></td>
         <td>
             <form:select path="eliteStatus">
-                <option value="${!eliteStatus}">нет</option>
-                <option value="${eliteStatus}">да</option>
+                <option value="true" ${npcForm.eliteStatus == true ? 'selected="selected"' : ''}>Да</option>
+                <option value="false" ${npcForm.eliteStatus == false ? 'selected="selected"' : ''}>Нет</option>
             </form:select>
         </td>
     </tr>

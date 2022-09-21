@@ -22,38 +22,32 @@ public class NpcService {
 
     public NonPlayerCharacter saveNpcFromForm(NpcForm npcForm) {
 
-        return npcDao.save(npcConvert(npcForm));
+        return npcDao.save(convertToNpc(npcForm));
     }
 
     public NonPlayerCharacter updateNpcFromForm(NpcForm npcForm) {
-        NonPlayerCharacter npc = npcConvert(npcForm);
+        NonPlayerCharacter npc = convertToNpc(npcForm);
         npcDao.update(npc);
         return npc;
     }
 
-    public NonPlayerCharacter npcConvert(NpcForm npcForm) {
-        if (npcForm.getId() != null) {
-            return new NonPlayerCharacter(
-                    npcForm.getId(),
-                    npcForm.getName(),
-                    npcForm.isEliteStatus(),
-                    npcForm.getFraction(),
-                    locationDao.findById(npcForm.getLocationId()));
-        } else {
-            return new NonPlayerCharacter(
-                    npcForm.getName(),
-                    npcForm.isEliteStatus(),
-                    npcForm.getFraction(),
-                    locationDao.findById(npcForm.getLocationId()));
-        }
+    public NonPlayerCharacter convertToNpc(NpcForm npcForm) {
+        NonPlayerCharacter npc = new NonPlayerCharacter();
+        npc.setId(npcForm.getId());
+        npc.setName(npcForm.getName());
+        npc.setEliteStatus(npcForm.isEliteStatus());
+        npc.setFraction(npcForm.getFraction());
+        npc.setLocation(locationDao.findById(npcForm.getLocationId()));
+        return npc;
     }
 
-    public NpcForm npcConvert(NonPlayerCharacter npc) {
-        return new NpcForm(
-                npc.getId(),
-                npc.getName(),
-                npc.isEliteStatus(),
-                npc.getFraction(),
-                npc.getLocation().getId());
+    public NpcForm convertToNpcForm(NonPlayerCharacter npc) {
+        NpcForm npcForm = new NpcForm();
+        npcForm.setId(npc.getId());
+        npcForm.setName(npc.getName());
+        npcForm.setEliteStatus(npc.isEliteStatus());
+        npcForm.setFraction(npc.getFraction());
+        npcForm.setLocationId(npc.getLocation().getId());
+        return npcForm;
     }
 }

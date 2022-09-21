@@ -21,19 +21,6 @@ public class Location extends BasePersist{
     public Location() {
     }
 
-    public Location(String name, Mainland mainland, Date introductionDate) {
-        this.name = name;
-        this.mainland = mainland;
-        this.introductionDate = introductionDate;
-    }
-
-    public Location(Integer id, String name, Mainland mainland, Date introductionDate) {
-        super(id);
-        this.name = name;
-        this.mainland = mainland;
-        this.introductionDate = introductionDate;
-    }
-
     public String getName() {
         return name;
     }

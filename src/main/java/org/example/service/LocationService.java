@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationService {
@@ -29,35 +31,41 @@ public class LocationService {
 
     public Location saveLocationFromForm(LocationForm locationForm, DateFormatter dateFormatter) throws ParseException {
 
-        return locationDao.findById(locationDao.save(locationConvert(locationForm, dateFormatter)).getId());
+        return locationDao.findById(locationDao.save(convertToLocation(locationForm, dateFormatter)).getId());
     }
 
     public Location updateLocationFromForm(LocationForm locationForm, DateFormatter dateFormatter) throws ParseException {
-        Location location = locationConvert(locationForm, dateFormatter);
+        Location location = convertToLocation(locationForm, dateFormatter);
         locationDao.update(location);
         return locationDao.findById(location.getId());
     }
 
-    public Location locationConvert(LocationForm locationForm, DateFormatter dateFormatter) throws ParseException {
-        if (locationForm.getId() != null) {
-            return new Location(
-                    locationForm.getId(),
-                    locationForm.getName(),
-                    locationForm.getMainland(),
-                    convertStringToDate(locationForm.getIntroductionDate(), dateFormatter));
-        } else {
-            return new Location(
-                    locationForm.getName(),
-                    locationForm.getMainland(),
-                    convertStringToDate(locationForm.getIntroductionDate(), dateFormatter));
-        }
+    public Location convertToLocation(LocationForm locationForm, DateFormatter dateFormatter) throws ParseException {
+        Location location = new Location();
+        location.setId(locationForm.getId());
+        location.setName(locationForm.getName());
+        location.setMainland(locationForm.getMainland());
+        location.setIntroductionDate(convertStringToDate(locationForm.getIntroductionDate(), dateFormatter));
+        return location;
     }
 
-    public LocationForm locationConvert(Location location, DateFormatter dateFormatter) throws ParseException {
-        return new LocationForm(
-                location.getId(),
-                location.getName(),
-                location.getMainland(),
-                convertDateToString(location.getIntroductionDate(), dateFormatter));
+    public LocationForm convertToLocationForm(Location location, DateFormatter dateFormatter) throws ParseException {
+        LocationForm locationForm = new LocationForm();
+        locationForm.setId(location.getId());
+        locationForm.setName(location.getName());
+        locationForm.setMainland(location.getMainland());
+        locationForm.setIntroductionDate(convertDateToString(location.getIntroductionDate(), dateFormatter));
+        return locationForm;
+    }
+
+    public List<LocationForm> convertToLocationForms(List<Location> locations, DateFormatter dateFormatter) {
+        return locationDao.returnAll().stream().map(location -> {
+            try {
+                return convertToLocationForm(location, dateFormatter);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).collect(Collectors.toList());
     }
 }
