@@ -4,12 +4,12 @@ package org.example.service;
 import org.example.dao.LocationDao;
 import org.example.entities.Location;
 import org.example.enums.DateFormatter;
+import org.example.util.DateUtil;
 import org.example.vo.LocationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,16 +18,6 @@ public class LocationService {
 
     @Autowired
     private LocationDao locationDao;
-
-    public Date convertStringToDate(String date, DateFormatter dateFormatter) throws ParseException {
-        return dateFormatter.getSimpleDateFormat().parse(date);
-
-    }
-
-    public String convertDateToString(Date date, DateFormatter dateFormatter) throws ParseException {
-        return dateFormatter.getSimpleDateFormat().format(date);
-
-    }
 
     public Location saveLocationFromForm(LocationForm locationForm, DateFormatter dateFormatter) throws ParseException {
 
@@ -45,7 +35,7 @@ public class LocationService {
         location.setId(locationForm.getId());
         location.setName(locationForm.getName());
         location.setMainland(locationForm.getMainland());
-        location.setIntroductionDate(convertStringToDate(locationForm.getIntroductionDate(), dateFormatter));
+        location.setIntroductionDate(DateUtil.convertStringToDate(locationForm.getIntroductionDate(), dateFormatter));
         return location;
     }
 
@@ -54,7 +44,7 @@ public class LocationService {
         locationForm.setId(location.getId());
         locationForm.setName(location.getName());
         locationForm.setMainland(location.getMainland());
-        locationForm.setIntroductionDate(convertDateToString(location.getIntroductionDate(), dateFormatter));
+        locationForm.setIntroductionDate(DateUtil.convertDateToString(location.getIntroductionDate(), dateFormatter));
         return locationForm;
     }
 
