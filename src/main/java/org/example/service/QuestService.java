@@ -42,9 +42,9 @@ public class QuestService {
 
     public QuestForm convertToQuestForm(Quest quest) {
         QuestForm questForm = new QuestForm();
-        questForm.setId(questForm.getId());
-        questForm.setName(questForm.getName());
-        questForm.setQuestType(questForm.getQuestType());
+        questForm.setId(quest.getId());
+        questForm.setName(quest.getName());
+        questForm.setQuestType(quest.getQuestType());
         questForm.setNpcId(quest.getNonPlayerCharacter().getId());
         return questForm;
     }
